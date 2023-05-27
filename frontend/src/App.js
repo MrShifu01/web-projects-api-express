@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 
 function App() {
   const screen = useSelector((state) => state.screen.screen)
+
   return (
     <div className='flex'>
         <Siderbar/>

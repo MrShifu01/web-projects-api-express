@@ -1,7 +1,8 @@
 import '../index.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
-import { updateScreen } from '../store/screen'
+import { resetScreen } from '../store/screen'
+import { populateArray } from '../store/projects'
 import axios from 'axios'
 
 
@@ -18,7 +19,7 @@ function Update() {
 
   useEffect(() => {
     currentProject()
-  })
+  }, [])
   
   const currentProject = () => {
     for (let i = 0; i < projects.length; i++) {
@@ -47,6 +48,12 @@ function Update() {
 
     try {
       await axios.put(`/api/?id=${updatedId}&title=${updatedTitle}&description=${updatedDescription}&URL=${updatedURL}`)
+      
+      const response = await axios.get("/api")
+      const data = response.data
+      dispatch(populateArray(data))
+      dispatch(resetScreen())
+
     } catch (e) {
       console.log("Error", (e))
     }
@@ -54,9 +61,8 @@ function Update() {
     setTitle("")
     setDescription("")
     setURL("")
-
-    dispatch(updateScreen("projects"))
-
+    
+ 
   }
 
   return (

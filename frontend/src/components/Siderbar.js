@@ -1,13 +1,18 @@
 import React from 'react'
 import { useDispatch} from 'react-redux'
 import { resetScreen, updateScreen } from '../store/screen'
+import { populateArray } from '../store/projects'
+import axios from 'axios'
 
 
 function Siderbar() {
   const dispatch = useDispatch()
  
-  const handleShow = (e) => {
+  async function handleShow (e) {
     e.preventDefault()
+    const response = await axios.get("/api")
+    const data = response.data
+    dispatch(populateArray(data))
     dispatch(resetScreen())
   }
 

@@ -5,12 +5,14 @@ import axios from 'axios'
 import { populateArray } from '../store/projects'
 import { assignProjectId } from '../store/update'
 import { updateScreen } from '../store/screen'
+
 function Mainscreen() {
     const projects = useSelector((state) => state.projects.projects)
     const dispatch = useDispatch()
     
     useEffect(() => {
         getProjects()
+
     })
 
     async function getProjects () {
@@ -23,7 +25,7 @@ function Mainscreen() {
         }
     }
 
-    async function handleUpdate (projectId) {
+    function handleUpdate (projectId) {
         try {
             dispatch(assignProjectId(projectId))
             dispatch(updateScreen('update'))
@@ -31,7 +33,6 @@ function Mainscreen() {
             console.log("error", e)
         }
     }
-
 
   return (
     <div>
