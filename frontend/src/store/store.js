@@ -1,10 +1,12 @@
 import {configureStore} from '@reduxjs/toolkit'
 import projectsReducer from './projects'
 import screenReducer from './screen'
+import updateReducer from './update'
 
 export default configureStore({
     reducer: {
         projects: projectsReducer,
-        screen: screenReducer
+        screen: screenReducer,
+        update: updateReducer
     }
 })

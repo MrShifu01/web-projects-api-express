@@ -2,8 +2,9 @@ import '../index.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import axios from 'axios'
-import { populateArray, resetArray } from '../store/projects'
-
+import { populateArray } from '../store/projects'
+import { assignProjectId } from '../store/update'
+import { updateScreen } from '../store/screen'
 function Mainscreen() {
     const projects = useSelector((state) => state.projects.projects)
     const dispatch = useDispatch()
@@ -20,7 +21,16 @@ function Mainscreen() {
         } catch (e) {
             console.log("Error", (e))
         }
-    } 
+    }
+
+    async function handleUpdate (projectId) {
+        try {
+            dispatch(assignProjectId(projectId))
+            dispatch(updateScreen('update'))
+        } catch (e) {
+            console.log("error", e)
+        }
+    }
 
 
   return (
@@ -31,8 +41,16 @@ function Mainscreen() {
                 <p>{project.description}</p>
                 <p className='underline'>{project.URL}</p>
                 <div className='flex mt-3 gap-3'>
-                    <button key={project.id} className='btn btn-sm'>Update</button>
-                    <button key={project.id} className='btn btn-sm'>Delete</button>
+                    <button 
+                    className='btn btn-sm'
+                    onClick={() => handleUpdate(project.id)}
+                    >
+                    Update</button>
+                    
+                    <button 
+                    className='btn btn-sm'
+                    >
+                    Delete</button>
                 </div>
             </div>
         ))}

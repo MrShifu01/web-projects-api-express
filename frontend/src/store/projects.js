@@ -10,15 +10,11 @@ export const projectsSlice = createSlice({
     reducers: {
         populateArray: (state, action) => {
             state.projects = action.payload
-        },
-
-        resetArray: (state) => {
-            state.projects = []
         }
     }
 })
 
-export const {populateArray, resetArray} = projectsSlice.actions
+export const {populateArray} = projectsSlice.actions
 
 export default projectsSlice.reducer
 
