@@ -1,3 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    background-image: radial-gradient( circle farthest-corner at 10% 20%,  #FF4E50 0%, #F9D423 90% );;
+}
+
+.sidebar-container {
+    width: 20%;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+
+.sidebar-title {
+    font-size: clamp(.8rem, 4.5vw, 3rem);
+    font-weight: bold;
+    color: black;
+}
+
+.sidebar-buttons {
+    font-size: clamp(.5rem, 2vw, 1rem);
+}
