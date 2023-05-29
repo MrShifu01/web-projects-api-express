@@ -1,72 +1,71 @@
-import '../index.css'
-import { useSelector, useDispatch } from 'react-redux'
-import { useState, useEffect } from 'react'
-import { resetScreen } from '../store/screen'
-import { populateArray } from '../store/projects'
-import axios from 'axios'
-
+import '../index.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { resetScreen } from '../store/screen';
+import { populateArray } from '../store/projects';
+import axios from 'axios';
 
 function Update() {
-  const [updateInfo, setUpdateInfo] = useState([])
+  const [updateInfo, setUpdateInfo] = useState([]);
 
-  const [title, setTitle] = useState("")
-  const [description, setDescription] = useState("")
-  const [URL, setURL] = useState("")
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [URL, setURL] = useState('');
 
-  const currentId = useSelector((state) => state.update.projectId)
-  const projects = useSelector((state) => state.projects.projects)
-  const dispatch = useDispatch()
+  const currentId = useSelector((state) => state.update.projectId);
+  const projects = useSelector((state) => state.projects.projects);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    currentProject()
-  })
-  
+    currentProject();
+  });
+
+  // Find and set the current project based on the currentId
   const currentProject = () => {
     for (let i = 0; i < projects.length; i++) {
       if (currentId === projects[i].id) {
-        setUpdateInfo(projects[i])
-        return
+        setUpdateInfo(projects[i]);
+        return;
       }
     }
-    return {}
-  }
+    return {};
+  };
 
-  async function handleUpdate (e, title, description, URL) {
-    e.preventDefault()
+  // Handle the update button click event
+  async function handleUpdate(e, title, description, URL) {
+    e.preventDefault();
 
-    const updatedId = updateInfo.id
-    const updatedTitle = title || updateInfo.title
-    const updatedDescription = description || updateInfo.description
-    const updatedURL =  URL || updateInfo.URL
+    const updatedId = updateInfo.id;
+    const updatedTitle = title || updateInfo.title;
+    const updatedDescription = description || updateInfo.description;
+    const updatedURL = URL || updateInfo.URL;
 
     try {
-      await axios.put(`/api/?id=${updatedId}&title=${updatedTitle}&description=${updatedDescription}&URL=${updatedURL}`)
-      
-      const response = await axios.get("/api")
-      const data = response.data
-      dispatch(populateArray(data))
-      dispatch(resetScreen())
+      // Send a PUT request to update the project with the new values
+      await axios.put(`/api/?id=${updatedId}&title=${updatedTitle}&description=${updatedDescription}&URL=${updatedURL}`);
 
+      // Fetch the updated list of projects from the API
+      const response = await axios.get('/api');
+      const data = response.data;
+
+      // Update the projects array in the Redux store
+      dispatch(populateArray(data));
+
+      // Reset the screen state to the default view
+      dispatch(resetScreen());
     } catch (e) {
-      console.log("Error", (e))
+      console.log('Error', e);
     }
 
-    setTitle("")
-    setDescription("")
-    setURL("")
-    
- 
+    // Clear the input fields after the update
+    setTitle('');
+    setDescription('');
+    setURL('');
   }
 
   return (
     <>
-      <form
-      className='flex flex-col gap-3 m-10'
-      type="submit"
-      onSubmit={(e) => 
-        handleUpdate(e, title, description, URL)
-      }>
-
+      <form className='flex flex-col gap-3 m-10' type='submit' onSubmit={(e) => handleUpdate(e, title, description, URL)}>
         <input
           type='text'
           onChange={(e) => setTitle(e.target.value)}
@@ -88,16 +87,12 @@ function Update() {
           placeholder={updateInfo.URL}
         />
 
-        <button 
-        className='btn'
-        type='submit'
-        >
-        Update</button>
+        <button className='btn' type='submit'>
+          Update
+        </button>
       </form>
-
     </>
-    )
-    
+  );
 }
 
-export default Update
+export default Update;
