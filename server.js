@@ -2,7 +2,7 @@ import express from 'express'
 import router from './router.js'
 
 const app = express()
-const PORT = process.env.PORT || 8000
+const PORT = 8000
 
 app.use("/api", router)
 

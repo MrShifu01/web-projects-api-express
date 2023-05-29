@@ -19,7 +19,7 @@ function Update() {
 
   useEffect(() => {
     currentProject()
-  }, [])
+  })
   
   const currentProject = () => {
     for (let i = 0; i < projects.length; i++) {

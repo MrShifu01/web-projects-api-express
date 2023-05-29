@@ -13,6 +13,12 @@ function addProject(id, title, description, URL) {
     "URL": URL
   }
 
+  for (let i = 0; i < projects.length; i++) {
+    if (id == projects[i].id || title == projects[i].title) {
+      return
+    }
+  }
+
   projects.push(newProject)
   fs.writeFileSync('projects.json', JSON.stringify(projects, null, 2))
 }
@@ -45,25 +51,41 @@ function updateProjects(id, title, description, URL) {
   }
 }
 
-router.post('/', (req, res) => {
-  const id = req.query.id
-  const title = req.query.title
-  const description = req.query.description
-  const URL = req.query.URL
+function deleteProject(id) {
+  try {
+    const projects = getProjects()
 
-  const projects = getProjects()
+    for (let i = 0; i < projects.length; i++) {
+      if (id === projects[i].id) {
+        projects.splice(i, 1)
+      }
+    }
+  
+    fs.writeFileSync('projects.json', JSON.stringify(projects, null, 2));
+  } catch (e) {
+    console.log("Error", (e))
+  }
+}
+
+router.post('/', (req, res) => {
+  const id = req.query.id;
+  const title = req.query.title;
+  const description = req.query.description;
+  const URL = req.query.URL;
+
+  const projects = getProjects();
 
   for (let i = 0; i < projects.length; i++) {
     if (id === projects[i].id || title === projects[i].title) {
-      res.send("Id or Title already exists, choose another")
-      return
+      return res.status(400).json({ error: "Id or Title already exists, choose another" });
     }
   }
 
-  addProject(id, title, description, URL)
-  res.send("Project Added")
+  addProject(id, title, description, URL);
+  res.send("Project Added");
+});
 
-})
+
 
 router.get('/', (req, res) => {
   res.send(getProjects());
@@ -92,5 +114,22 @@ router.put('/', (req, res) => {
     res.send('Project Does Not Exist');
   }
 });
+
+router.delete('/', (req, res) => {
+  const id = Number(req.query.id)
+
+  const projects = getProjects()
+
+  for (let i = 0; i < projects.length; i++) {
+    if (id === projects[i].id) {
+      res.send("Project deleted")
+      deleteProject(id)
+      return
+    }
+  }
+  
+  res.send("Project couldn't be found")
+
+})
 
 export default router
