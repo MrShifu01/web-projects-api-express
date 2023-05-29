@@ -3,6 +3,20 @@ import fs from 'fs';
 
 const router = express.Router();
 
+function addProject(id, title, description, URL) {
+  const projects = getProjects()
+
+  const newProject = {
+    "id": Number(id),
+    "title": title,
+    "description": description,
+    "URL": URL
+  }
+
+  projects.push(newProject)
+  fs.writeFileSync('projects.json', JSON.stringify(projects, null, 2))
+}
+
 function getProjects() {
   try {
     const projects = fs.readFileSync('projects.json', 'utf8');
@@ -30,6 +44,26 @@ function updateProjects(id, title, description, URL) {
     console.log('Error', e);
   }
 }
+
+router.post('/', (req, res) => {
+  const id = req.query.id
+  const title = req.query.title
+  const description = req.query.description
+  const URL = req.query.URL
+
+  const projects = getProjects()
+
+  for (let i = 0; i < projects.length; i++) {
+    if (id === projects[i].id || title === projects[i].title) {
+      res.send("Id or Title already exists, choose another")
+      return
+    }
+  }
+
+  addProject(id, title, description, URL)
+  res.send("Project Added")
+
+})
 
 router.get('/', (req, res) => {
   res.send(getProjects());

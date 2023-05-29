@@ -33,18 +33,11 @@ function Update() {
 
   async function handleUpdate (e, title, description, URL) {
     e.preventDefault()
-      
-    console.log(title)
 
     const updatedId = updateInfo.id
     const updatedTitle = title || updateInfo.title
     const updatedDescription = description || updateInfo.description
     const updatedURL =  URL || updateInfo.URL
-
-    console.log(`${updatedId}`)
-    console.log(`${updatedTitle}`)
-    console.log(`${updatedDescription}`)
-    console.log(`${updatedURL}`)
 
     try {
       await axios.put(`/api/?id=${updatedId}&title=${updatedTitle}&description=${updatedDescription}&URL=${updatedURL}`)

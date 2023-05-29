@@ -25,13 +25,21 @@ function Mainscreen() {
         }
     }
 
-    function handleUpdate (projectId) {
+    function handleUpdate (e, projectId) {
+        e.preventDefault()
+
+        dispatch(assignProjectId(projectId))
+        dispatch(updateScreen('update'))
+    }
+
+    async function handleDelete (e, projectId) {
+        e.preventDefault()
         try {
-            dispatch(assignProjectId(projectId))
-            dispatch(updateScreen('update'))
+            await axios.delete(`/api/?id=${projectId}`)
         } catch (e) {
-            console.log("error", e)
+            console.log("Error", (e))
         }
+
     }
 
   return (
@@ -44,12 +52,13 @@ function Mainscreen() {
                 <div className='flex mt-3 gap-3'>
                     <button 
                     className='btn btn-sm'
-                    onClick={() => handleUpdate(project.id)}
+                    onClick={(e) => handleUpdate(e, project.id)}
                     >
                     Update</button>
                     
                     <button 
                     className='btn btn-sm'
+                    onClick={(e) => handleDelete(e, project.id)}
                     >
                     Delete</button>
                 </div>
