@@ -2,22 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Apply box-sizing to all elements */
 *, *::before, *::after {
     box-sizing: border-box;
 }
 
+/* Set margin and height for the body */
 body {
     margin: 0;
     height: 100vh;
-    background-image: radial-gradient( circle farthest-corner at 10% 20%,  #FF4E50 0%, #F9D423 90% );;
+    /* Apply a radial gradient background image */
+    background-image: radial-gradient(circle farthest-corner at 10% 20%,  #FF4E50 0%, #F9D423 90%);
 }
 
+/* Styling for the sidebar container */
 .sidebar-container {
     width: 20%;
     height: 100vh;
     background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Styling for the sidebar content */
 .sidebar-content {
     display: flex;
     flex-direction: column;
@@ -25,12 +30,14 @@ body {
     padding: 1rem;
 }
 
+/* Styling for the sidebar title */
 .sidebar-title {
     font-size: clamp(.8rem, 4.5vw, 3rem);
     font-weight: bold;
     color: black;
 }
 
+/* Styling for the sidebar buttons */
 .sidebar-buttons {
     font-size: clamp(.5rem, 2vw, 1rem);
 }

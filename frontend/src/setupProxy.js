@@ -1,12 +1,13 @@
 const {createProxyMiddleware} = require('http-proxy-middleware');
 
+// Creating a proxy due to complications with other methods
 module.exports = function (app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      // 👇️ make sure to update your target
       target: 'http://127.0.0.1:8000/',
       changeOrigin: true,
     }),
   );
 };
+
