@@ -99,3 +99,8 @@ facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Jason,
+Thanks for the help, I think I managed to fix everythig, at least it seems so from my side, I encoded the URI parameters on the client side to help with the special characters and I didnt see the inifinite loop before, but I hope I managed to fix it. It seems it had to do with the useEffect hook not being set up properly.
+Thanks,
+Chris
