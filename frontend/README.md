@@ -2,12 +2,41 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Installation
+
+To get started with this project, follow the steps below:
+
+1. Clone the repository to your local machine:
+   ```shell
+   git clone https://github.com/MrShifu01/web-projects-api-express.git
+   ```
+2. Navigate to the project directory:
+   ```shell
+   cd web-projects-api-express
+   ```
+3. Install the dependencies:
+   ```shell
+   npm install
+   ```
+4. Additionally, navigate to the folder called 'frontend':
+    ```shell
+    cd frontend
+    ```
+5. Install the frontend dependencies:
+    ```shell
+    npm install
+    ```
+
 ## Available Scripts
 
 In the project directory, you can run:
 
 ### `npm start`
 
+#### In the root folder called web-projects-api-express type 'npm start'
+This runs the server at the chosen port which is 8000
+
+#### In the frontend folder type 'npm start'
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
@@ -35,9 +64,9 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project, so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point, you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However, we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
 ## Learn More
 
@@ -63,7 +92,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/a
 
 ### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+This section has moved here: [https://
+
+facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
 ### `npm run build` fails to minify
 

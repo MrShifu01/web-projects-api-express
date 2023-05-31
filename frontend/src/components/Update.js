@@ -17,28 +17,22 @@ function Update() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    currentProject();
-  });
-
-  // Find and set the current project based on the currentId
-  const currentProject = () => {
     for (let i = 0; i < projects.length; i++) {
       if (currentId === projects[i].id) {
         setUpdateInfo(projects[i]);
-        return;
+        break;
       }
     }
-    return {};
-  };
+  }, [currentId, projects]);
 
   // Handle the update button click event
   async function handleUpdate(e, title, description, URL) {
     e.preventDefault();
 
     const updatedId = updateInfo.id;
-    const updatedTitle = title || updateInfo.title;
-    const updatedDescription = description || updateInfo.description;
-    const updatedURL = URL || updateInfo.URL;
+    const updatedTitle = encodeURIComponent(title) || updateInfo.title;
+    const updatedDescription = encodeURIComponent(description) || updateInfo.description;
+    const updatedURL = encodeURIComponent(URL) || updateInfo.URL;
 
     try {
       // Send a PUT request to update the project with the new values

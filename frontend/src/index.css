@@ -10,16 +10,17 @@
 /* Set margin and height for the body */
 body {
     margin: 0;
-    height: 100vh;
     /* Apply a radial gradient background image */
     background-image: radial-gradient(circle farthest-corner at 10% 20%,  #FF4E50 0%, #F9D423 90%);
+    background-size: cover;
+    min-height: 100vh;
 }
 
 /* Styling for the sidebar container */
 .sidebar-container {
     width: 20%;
-    height: 100vh;
     background-color: rgba(255, 255, 255, 0.1);
+    min-height: 100vh;
 }
 
 /* Styling for the sidebar content */

@@ -11,10 +11,6 @@ function Mainscreen() {
   const projects = useSelector((state) => state.projects.projects);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    getProjects();
-  });
-
   // Fetch projects from the API and update the Redux store
   async function getProjects() {
     try {
@@ -25,6 +21,10 @@ function Mainscreen() {
       console.log("Error", e);
     }
   }
+
+  useEffect(() => {
+    getProjects();
+  }, []);
 
   // Handle the update button click event
   function handleUpdate(e, projectId) {
@@ -38,6 +38,7 @@ function Mainscreen() {
     e.preventDefault();
     try {
       await axios.delete(`/api/?id=${projectId}`);
+      getProjects(); // Fetch projects again after successful deletion
     } catch (e) {
       console.log("Error", e);
     }
