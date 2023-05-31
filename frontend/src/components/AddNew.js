@@ -36,9 +36,18 @@ function AddNew() {
       }
     }
 
+    // Encoding the parameter to handle special characters
+    const encodedTitle = encodeURIComponent(title);
+    const encodedDesc = encodeURIComponent(description);
+    const encodedURL = encodeURIComponent(URL);
+
     try {
       // Send a POST request to the API to add the new project
-      await axios.post(`/api/?id=${newId}&title=${title}&description=${description}&URL=${URL}`);
+      await axios.post(`/api/?id=${newId}&title=${encodedTitle}&description=${encodedDesc}&URL=${encodedURL}`, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
 
       // Retrieve updated project data from the API
       const response = await axios.get('/api');
